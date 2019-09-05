@@ -148,14 +148,18 @@ public class Ejercicios {
 		preparedStatement.executeUpdate();
 		
 		/*GET OWNER_ID*/
-		String sqlOwnerID = "SELECT id FROM owners";
+		String sqlOwnerID = "SELECT id FROM owners WHERE first_name = ? OR last_name= ?";
 		
-		ResultSet rs = statement.executeQuery(sql);
+	    preparedStatement.setString(1, firstName);
+	    preparedStatement.setString(2, lastName);
+	    
+	    ResultSet rs = preparedStatement.executeQuery();
 
-		while (rs.next()) {
-
-			int id = rs.getInt("id");
-		}
+	    while(rs.next()){  
+	    	int id = rs.getInt("id");
+	    	System.out.println("ID : " +id);
+	          }
+	    rs.close();
 
 		
 		/* INSERT INTO PETS VALUES*/
