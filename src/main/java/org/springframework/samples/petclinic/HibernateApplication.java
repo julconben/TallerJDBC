@@ -6,14 +6,12 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.annotations.Table;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.samples.petclinic.owner.Bill;
+import org.springframework.samples.petclinic.owner.BillDAO;
 import org.springframework.samples.petclinic.owner.BillLine;
 import org.springframework.samples.petclinic.owner.BillRepository;
 import org.springframework.samples.petclinic.owner.Pet;
@@ -26,7 +24,8 @@ public class HibernateApplication implements CommandLineRunner {
 	
 	@Autowired 
 	private BillRepository billRepository;
-	
+	@Autowired
+	private BillDAO billDao;
 	@Autowired
 	private VisitRepository visitRepository;
 	@Autowired
@@ -64,16 +63,20 @@ public class HibernateApplication implements CommandLineRunner {
 		
 		bl1.setIdBill(b);
 		bl2.setIdBill(b);
-		bl1.setDetails("Uma linha");
-		bl2.setDetails("Duas Linhas");
+		bl1.setDetails("This line tests the");
+		bl2.setDetails("BillLine implementation");
 		
 		bLineList.add(bl1);
 		bLineList.add(bl2);
 		
 		b.setBillLines(bLineList);
 		
-		System.out.println("Teste a BillLine:*******************************************************");
+		System.out.println("Test a BillLine:***************************************");
 		b.printAllDetails();
+		
+
+		
+		//billRepository.delete(b); TODO
 		
 		
 		for(Bill bi : listaFacturas ) {
