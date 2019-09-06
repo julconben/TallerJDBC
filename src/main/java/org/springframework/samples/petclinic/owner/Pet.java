@@ -113,4 +113,11 @@ public class Pet extends NamedEntity {
         visit.setPetId(this.id);
     }
 
+	public Pet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+    
+    
+
 }

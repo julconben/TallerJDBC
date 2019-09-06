@@ -1,11 +1,15 @@
 package org.springframework.samples.petclinic;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.*;
 
+import org.springframework.samples.petclinic.owner.Owner;
+import org.springframework.samples.petclinic.owner.Pet;
 public class Ejercicios {
 
     public static void ejercicio1(Connection connection, Statement statement) throws SQLException {
@@ -98,12 +102,24 @@ public class Ejercicios {
     }
 
     public static void reto(Connection connection, Statement statement) throws SQLException {
+    	//Owner ze = new Owner();
+    	//Pet toze= new Pet();
+    	
+    	Date data = new Date(0, 7, 17);
+    	
     	String sql1 = "INSERT INTO owners VALUES (null, 'Sofia', 'Condesso', 'Rua da Amendoeira', 'Faro', 917706689);";
-    	String sql2 = "INSERT INTO pets VALUES (null, 'Toze', '2000', 145444, 3);";
-    	PreparedStatement stmt = null;
-    	stmt = connection.prepareStatement(sql1);
-    	stmt = connection.prepareStatement(sql2);
-    	stmt.executeUpdate();
+    	String sql2 = "INSERT INTO pets VALUES (null, 'Toze', ?, 145444, 3);";
+    	
+    	PreparedStatement stmt1 = null;
+    	PreparedStatement stmt2 = null;
+    	
+    	stmt1 = connection.prepareStatement(sql1);
+    	stmt2 = connection.prepareStatement(sql2);
+    	stmt2.setDate(1, data);
+    	
+    	
+    	stmt1.executeUpdate();
+    	stmt2.executeUpdate();
 
     }
 
