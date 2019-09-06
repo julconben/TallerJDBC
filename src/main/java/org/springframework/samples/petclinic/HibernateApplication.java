@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
@@ -13,9 +15,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.samples.petclinic.owner.Bill;
+import org.springframework.samples.petclinic.owner.BillDAO;
 import org.springframework.samples.petclinic.owner.BillRepository;
 import org.springframework.samples.petclinic.owner.Pet;
+import org.springframework.samples.petclinic.owner.PetDAO;
 import org.springframework.samples.petclinic.owner.PetRepository;
+import org.springframework.samples.petclinic.owner.VisitDAO;
 import org.springframework.samples.petclinic.visit.Visit;
 import org.springframework.samples.petclinic.visit.VisitRepository;
 
@@ -30,9 +35,20 @@ public class HibernateApplication implements CommandLineRunner {
 	@Autowired
 	private PetRepository petRepository;
 	
+	@Autowired
+	private BillDAO billDAO;
+	
+	@Autowired
+	private VisitDAO visitDAO;
+	
+	@Autowired
+	private PetDAO petDAO;
+	
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(HibernateApplication.class, args);
 	}
+    @PersistenceContext
+    private EntityManager entityManager;
 	
 	@Override
 	@Transactional
@@ -48,7 +64,7 @@ public class HibernateApplication implements CommandLineRunner {
 		 * Crear aquí las facturas y enlazarlas, por último, volver a mostrar dichas visitas
 		 */
 		Bill b = new Bill();
-		b.setIdNumber(1234567890);
+		b.setIdNumber(43434343);
 		b.setMoney(1.0);
 		b.setPaymentDate(new Date());
 		List<Bill> listaFacturas = new ArrayList<Bill>();
@@ -62,5 +78,21 @@ public class HibernateApplication implements CommandLineRunner {
 		for(Visit v : visits) {
 			System.out.println(v.toString());
 		}
+		
+		////
+		System.out.println("////////////////////////////////////");
+		//billDAO.create(b);
+		
+		//visitDAO.findOne(8).getBill();
+		 Pet findOne = petDAO.findOne(8);
+		List<Visit> visits2 = findOne.getVisits();
+		
+		for (Visit visit : visits2) {
+			
+			System.out.println(visit);
+			System.out.println(visit.getBill());
+		}
+		
+		
 	}
 }
