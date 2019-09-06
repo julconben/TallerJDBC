@@ -61,7 +61,6 @@ public class Owner extends Person {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private Set<Pet> pets;
 
-
     public String getAddress() {
         return this.address;
     }
@@ -110,7 +109,11 @@ public class Owner extends Person {
         pet.setOwner(this);
     }
 
-    /**
+	public void setPets(Set<Pet> pets) {
+		this.pets = pets;
+	}
+
+	/**
      * Return the Pet with the given name, or null if none found for this Owner.
      *
      * @param name to test

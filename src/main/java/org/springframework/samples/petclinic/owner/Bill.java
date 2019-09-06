@@ -2,10 +2,14 @@ package org.springframework.samples.petclinic.owner;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,7 +24,8 @@ import org.springframework.samples.petclinic.visit.Visit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="facturas")
+@Table(name="Bill")
+
 public class Bill extends BaseEntity {
 	
 	@Digits(integer=10, fraction=0)
@@ -34,8 +39,10 @@ public class Bill extends BaseEntity {
 	@DecimalMin("0.0")
 	private double money;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "bill", cascade = CascadeType.ALL)
-	@JsonIgnore
+	@OneToMany(mappedBy="idBill", targetEntity = BillLine.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<BillLine> bLine;
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy="bill",cascade = CascadeType.ALL)
 	private Visit visit;
 	
 	public Bill () { }
@@ -71,6 +78,18 @@ public class Bill extends BaseEntity {
 	public void setVisit(Visit visit) {
 		this.visit = visit;
 	}
+
+	public List<BillLine> getBillLines() {
+		return bLine;
+	}
+
+	public void setBillLines(List<BillLine> billLines) {
+		this.bLine = billLines;
+	}
+	
+	
+
+	
 	
 	
 }

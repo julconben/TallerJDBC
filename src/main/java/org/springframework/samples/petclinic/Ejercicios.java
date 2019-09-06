@@ -175,28 +175,30 @@ public static void printTableOwners(PreparedStatement statement) throws SQLExcep
     public static void reto(Connection connection, Statement statement) throws SQLException {
 
     	Owner own = new Owner();
-    	Pet mystik= new Pet();
+    	Pet myPet= new Pet();
     	Date birth = new Date(2019-03-01);
     	PetType cat = new PetType();
     	
     	String sqlOwner = "INSERT INTO owners (first_name, last_name, address, city, telephone) VALUES (?, ?, ?, ?, ?);";
-		String sqlRemoveOwner = "DELETE FROM owners WHERE first_name ='Diana';";
+		String sqlRemoveOwner = "DELETE FROM owners WHERE first_name = ? AND last_name = ?;";
 		String sqlSelectOwner = "SELECT id FROM owners WHERE first_name = ? AND last_name = ?;";
 		String sqlInsertPet = "INSERT INTO pets (name, birth_date, owner_id, type_id) VALUES (?, ?, ?, ?);";
-    	
+		String sqlRemovePet = "DELETE FROM petclinic.pets WHERE name = ? AND id_owner = ?;";
+		
+    	//****************************************************************************************************************
     	own.setFirstName("Antonio");
     	own.setLastName("Cardoso");
     	own.setAddress("Quinta das amoreiras");
     	own.setCity("Caparica");
-    	own.setTelephone("964440937");
-    	
-    	mystik.setName("Mystik");
-    	mystik.setBirthDate(birth);
-    	mystik.setType(cat);
-    	own.addPet(mystik);
+    	own.setTelephone("964440937"); 	
+    	myPet.setName("Mystik");
+    	myPet.setBirthDate(birth);
+    	myPet.setType(cat);
+    	own.addPet(myPet);
 
 		PreparedStatement prepSqlOwner = connection.prepareStatement(sqlOwner);
 		PreparedStatement prepRemOwner = connection.prepareStatement(sqlRemoveOwner);
+		PreparedStatement prepRemPet = connection.prepareStatement(sqlRemovePet);
 		PreparedStatement prepSelectOwner = connection.prepareStatement(sqlSelectOwner);
 		PreparedStatement prepInsertPet = connection.prepareStatement(sqlInsertPet);
 		
@@ -206,27 +208,35 @@ public static void printTableOwners(PreparedStatement statement) throws SQLExcep
 		prepSqlOwner.setString(4, own.getCity());
 		prepSqlOwner.setString(5, own.getTelephone());
 		
+		prepRemOwner.setString(1, own.getFirstName());
+		prepRemOwner.setString(2, own.getLastName());
+		//prepRemPet.setString(1, myPet.getName());
+		//prepRemPet.setString(2, own.getId().toString()); //TODO
+		
 		prepSqlOwner.executeUpdate();
         
-       // prepRemOwner.executeUpdate(); // Remove um utilizador
-
-		prepSelectOwner.setString(1, own.getFirstName());
+       	prepSelectOwner.setString(1, own.getFirstName());
 		prepSelectOwner.setString(2, own.getLastName());
+		
 		
 		ResultSet rs = prepSelectOwner.executeQuery();
 		Integer id = 0;
+		
 		while (rs.next()){	
 			id = rs.getInt("id");
 			break;
-    }
-		prepInsertPet.setString(1, mystik.getName());
-		prepInsertPet.setString(2, mystik.getBirthDate().toString());
+		}
+		
+		prepInsertPet.setString(1, myPet.getName());
+		prepInsertPet.setString(2, myPet.getBirthDate().toString());
 		prepInsertPet.setInt(3, id);
-		prepInsertPet.setString(4, mystik.getType().toString());
+		prepInsertPet.setString(4, myPet.getType().toString());
 		
 		prepInsertPet.executeUpdate();
-        
-    	printTableOwners(prepSqlOwner);
+    	
+    	//prepRemPet.executeUpdate();//remove um pet
+    	//prepRemOwner.executeUpdate(); // Remove um utilizador
+    	//printTableOwners(prepSqlOwner);
     	
     	prepSqlOwner.close();
     	prepRemOwner.close();
