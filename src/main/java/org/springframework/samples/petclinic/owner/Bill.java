@@ -87,6 +87,13 @@ public class Bill extends BaseEntity {
 		this.bLine = billLines;
 	}
 	
+	public void printAllDetails() {
+		System.out.println("[ID "+ idNumber + " - " + money + "$ | " + paymentDate.toString()+ " ]");
+		for(BillLine bl : bLine)
+			System.out.println(bl.getDetails());
+		System.out.println("*******************************************************"); //for easier reading
+	}
+	
 	
 
 	

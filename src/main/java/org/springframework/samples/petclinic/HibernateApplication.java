@@ -14,7 +14,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.samples.petclinic.owner.Bill;
-import org.springframework.samples.petclinic.owner.BillLines;
+import org.springframework.samples.petclinic.owner.BillLine;
 import org.springframework.samples.petclinic.owner.BillRepository;
 import org.springframework.samples.petclinic.owner.Pet;
 import org.springframework.samples.petclinic.owner.PetRepository;
@@ -58,8 +58,22 @@ public class HibernateApplication implements CommandLineRunner {
 		listaFacturas.add(b);
 		listaFacturas = billRepository.save(listaFacturas);
 		
-		List<BillLine> bL = new BillLines();
+		List<BillLine> bLineList = new ArrayList<>();
+		BillLine bl1 = new BillLine();
+		BillLine bl2 = new BillLine();
 		
+		bl1.setIdBill(b);
+		bl2.setIdBill(b);
+		bl1.setDetails("Uma linha");
+		bl2.setDetails("Duas Linhas");
+		
+		bLineList.add(bl1);
+		bLineList.add(bl2);
+		
+		b.setBillLines(bLineList);
+		
+		System.out.println("Teste a BillLine:*******************************************************");
+		b.printAllDetails();
 		
 		
 		for(Bill bi : listaFacturas ) {
