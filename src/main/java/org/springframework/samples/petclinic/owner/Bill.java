@@ -1,12 +1,21 @@
 package org.springframework.samples.petclinic.owner;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,6 +43,36 @@ public class Bill extends BaseEntity {
 	@DecimalMin("0.0")
 	private double money;
 	
+	
+	
+	/*
+	@ManyToOne
+	@JoinColumn(name="owner")
+	private Owner owner;
+	*/
+	
+	
+//////////////////
+	
+//	@PersistenceContext(unitName = "movie-unit", type = PersistenceContextType.EXTENDED)
+//    private EntityManager entityManager;
+//
+//    public void addMovie(Bill o) throws Exception {
+//        entityManager.persist(o);
+//    }
+//
+//    public void deleteMovie(Bill o) throws Exception {
+//        entityManager.remove(o);
+//    }
+//
+//    public List<Bill> getMovies() throws Exception {
+//        Query query = entityManager.createQuery("SELECT m from Movie as m");
+//        return query.getResultList();
+//    }
+	
+/////////////
+	
+
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "bill", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Visit visit;
@@ -70,6 +109,12 @@ public class Bill extends BaseEntity {
 
 	public void setVisit(Visit visit) {
 		this.visit = visit;
+	}
+
+	@Override
+	public String toString() {
+		return "Bill [idNumber=" + idNumber + ", paymentDate=" + paymentDate + ", money=" + money + ", visit=" + visit
+				+ "]";
 	}
 	
 	
