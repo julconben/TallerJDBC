@@ -154,11 +154,6 @@ public class Ejercicios {
 		preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setInt(1, id);
 		preparedStatement.execute(sql);
-		
-		 
-		
-
-		
 	}
 
 }

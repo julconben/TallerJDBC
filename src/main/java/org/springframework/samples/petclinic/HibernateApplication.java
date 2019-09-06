@@ -6,14 +6,13 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.samples.petclinic.owner.Bill;
 import org.springframework.samples.petclinic.owner.BillRepository;
+import org.springframework.samples.petclinic.owner.Linhas;
 import org.springframework.samples.petclinic.owner.Pet;
 import org.springframework.samples.petclinic.owner.PetRepository;
 import org.springframework.samples.petclinic.visit.Visit;
@@ -62,5 +61,18 @@ public class HibernateApplication implements CommandLineRunner {
 		for(Visit v : visits) {
 			System.out.println(v.toString());
 		}
+		
+		
+		Linhas l = new Linhas();
+		l.setDetails1("HOLA JOAO");
+		l.setBill(b);
+		ArrayList<Linhas> linhas = new ArrayList<Linhas>();
+		linhas.add(l);
+		b.setListalinha(linhas);
+		billRepository.save(b);
+//		
+//		Bill billBD = billRepository.findOne(3);
+//		billRepository.delete(billBD);
+		
 	}
 }
