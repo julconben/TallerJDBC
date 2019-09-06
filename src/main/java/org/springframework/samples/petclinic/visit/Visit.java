@@ -61,14 +61,12 @@ public class Visit extends BaseEntity {
     @Column(name = "pet_id")
     private Integer petId;
 
-
     /**
      * Creates a new instance of Visit for the current date
      */
     public Visit() {
         this.date = new Date();
     }
-
 
     /**
      * Getter for property date.
@@ -82,7 +80,8 @@ public class Visit extends BaseEntity {
     /**
      * Setter for property date.
      *
-     * @param date New value of property date.
+     * @param date
+     *            New value of property date.
      */
     public void setDate(Date date) {
         this.date = date;
@@ -100,7 +99,8 @@ public class Visit extends BaseEntity {
     /**
      * Setter for property description.
      *
-     * @param description New value of property description.
+     * @param description
+     *            New value of property description.
      */
     public void setDescription(String description) {
         this.description = description;
@@ -118,38 +118,37 @@ public class Visit extends BaseEntity {
     /**
      * Setter for property pet id.
      *
-     * @param petId New value of property pet id.
+     * @param petId
+     *            New value of property pet id.
      */
     public void setPetId(Integer petId) {
         this.petId = petId;
     }
-    
+
     // Hibernate
-    
+
     @OneToOne(fetch = FetchType.LAZY)
     private Bill bill;
 
-
     public Bill getBill() {
-	return bill;
+        return bill;
     }
 
     public void setBill(Bill bill) {
- 	this.bill = bill;
+        this.bill = bill;
     }
-    
+
     public String toString() {
-    	String mensaje = "";
-    	
-    	mensaje += "Visita con id: " + this.getId() + "\n";
-    	mensaje += "==================\n";
-    	mensaje += "Fecha: " + this.getDate() +"\n";
-    	mensaje += "Descripcion: " + this.getDescription() +"\n";
-    	mensaje += "Id de factura: " + ((this.getBill() == null || (this.getBill() != null && this.getBill().getId() == null)) ? "No existe" : this.getBill().getId()) +"\n";
-    		
-    	return mensaje;
+        String mensaje = "";
+
+        mensaje += "Visita con id: " + this.getId() + "\n";
+        mensaje += "==================\n";
+        mensaje += "Fecha: " + this.getDate() + "\n";
+        mensaje += "Descripcion: " + this.getDescription() + "\n";
+        mensaje += "Id de factura: " + ((this.getBill() == null || (this.getBill() != null && this.getBill().getId() == null)) ? "No existe"
+                : this.getBill().getId()) + "\n";
+
+        return mensaje;
     }
-
-
 
 }

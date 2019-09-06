@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -29,6 +30,11 @@ public class JDBCApplication {
             if (connection != null) {
                 System.out.println("Conexión establecida");
             }
+
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM vets";
+            ResultSet rs = statement.executeQuery(sql);
+
             // TODO: hacer aqui los ejercicios del taller en la usando la Class Ejercicios
             System.out.println("\n\n===== EJERCICIO 1 =====");
             Ejercicios.ejercicio1(connection, statement);

@@ -61,6 +61,8 @@ public class Owner extends Person {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private Set<Pet> pets;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private Set<Bill> bills;
 
     public String getAddress() {
         return this.address;
@@ -113,7 +115,8 @@ public class Owner extends Person {
     /**
      * Return the Pet with the given name, or null if none found for this Owner.
      *
-     * @param name to test
+     * @param name
+     *            to test
      * @return true if pet name is already in use
      */
     public Pet getPet(String name) {
@@ -123,7 +126,8 @@ public class Owner extends Person {
     /**
      * Return the Pet with the given name, or null if none found for this Owner.
      *
-     * @param name to test
+     * @param name
+     *            to test
      * @return true if pet name is already in use
      */
     public Pet getPet(String name, boolean ignoreNew) {
@@ -140,18 +144,25 @@ public class Owner extends Person {
         return null;
     }
 
+    public Set<Bill> getBills() {
+        return bills;
+    }
+
+    public void setBills(Set<Bill> bills) {
+        this.bills = bills;
+    }
+
+    public void setPets(Set<Pet> pets) {
+        this.pets = pets;
+    }
+
     @Override
     public String toString() {
         return new ToStringCreator(this)
 
-            .append("id", this.getId())
-            .append("new", this.isNew())
-            .append("lastName", this.getLastName())
-            .append("firstName", this.getFirstName())
-            .append("address", this.address)
-            .append("city", this.city)
-            .append("telephone", this.telephone)
-            .toString();
+                .append("id", this.getId()).append("new", this.isNew()).append("lastName", this.getLastName())
+                .append("firstName", this.getFirstName()).append("address", this.address).append("city", this.city)
+                .append("telephone", this.telephone).toString();
     }
-   
+
 }
