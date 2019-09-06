@@ -1,12 +1,15 @@
 package org.springframework.samples.petclinic;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.springframework.samples.petclinic.owner.Owner;
+import org.springframework.samples.petclinic.owner.Pet;
 public class Ejercicios {
 
 	public static void ejercicio1(Connection connection, Statement statement) throws SQLException {
@@ -104,10 +107,55 @@ public class Ejercicios {
 	}
 
 	public static void reto(Connection connection, Statement statement) throws SQLException {
-		statement = connection.createStatement();
-		String sql = "INSERT INTO owners VALUES(null,'Joao','Anjos','DR.Isabelinha','Almeirim','9222222')"; 
+		Owner novoOwner = new Owner();
+				
+		novoOwner.setId(null);
+		novoOwner.setFirstName("Pedro");
+		novoOwner.setLastName("Veado");
+		novoOwner.setCity("Santarem");
+		novoOwner.setAddress("Rua Dos Mouros");
+		
+		Pet novoPet = new Pet();
+		
+		novoPet.setId(null);
+		novoPet.setName("Negão");
+		Date data = new Date(2009-12-19);
+		novoPet.setBirthDate(data);
+		
+		String sql = "INSERT INTO owners VALUES(null,?,?,?,?,?)";
+		PreparedStatement preparedStatement= null;
+		preparedStatement= connection.prepareStatement(sql);
+		preparedStatement.setString(1, novoOwner.getFirstName());
+		preparedStatement.setString(2, novoOwner.getLastName());
+		preparedStatement.setString(3, novoOwner.getAddress());
+		preparedStatement.setString(4, novoOwner.getCity());
+		preparedStatement.setString(5, novoOwner.getTelephone());
 		statement.executeUpdate(sql);
-		String sql1 = "SELECT * FROM owners";
+
+
+		statement = connection.createStatement();
+		String sql1= "SELECT * FROM owners WHERE firs_name='Pedro' AND last_name='Veado'";
+		ResultSet rs= statement.executeQuery(sql1);
+		int id=0;
+		
+		while (rs.next()) {
+			id=rs.getInt("id");
+		}
+
+		String sql3 = "INSERT INTO pets VALUES (null,?,?,?,?)";
+		preparedStatement = connection.prepareStatement(sql3);
+		preparedStatement.setString(1, "Negão");
+		preparedStatement.setDate(2, data);
+		preparedStatement.setInt(3, id);
+		preparedStatement.setInt(4, 5);
+		preparedStatement.executeUpdate();
+
+		sql = "DELETE * FROM owners WHERE id=?";
+		preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setInt(1, id);
+		preparedStatement.execute(sql);
+		
+		 
 		
 
 		
