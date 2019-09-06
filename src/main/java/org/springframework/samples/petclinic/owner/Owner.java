@@ -59,10 +59,21 @@ public class Owner extends Person {
     private String telephone;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-    private Set<Pet> pets;
+    private Set<Pet> pets ;
+    
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+//    private List<Bill> bills;
 
+    
+//    public List<Bill> getBills() {
+//		return bills;
+//	}
+//
+//	public void setBills(List<Bill> bills) {
+//		this.bills = bills;
+//	}
 
-    public String getAddress() {
+	public String getAddress() {
         return this.address;
     }
 

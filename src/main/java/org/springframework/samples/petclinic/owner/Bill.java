@@ -1,11 +1,17 @@
 package org.springframework.samples.petclinic.owner;
 
 
+import java.beans.Statement;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -34,11 +40,32 @@ public class Bill extends BaseEntity {
 	@DecimalMin("0.0")
 	private double money;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "bill", cascade = CascadeType.ALL)
+//	@ManyToOne
+//	@JoinColumn(name = "owner" )
+//	private Owner owner;
+	
 	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "bill")
 	private Visit visit;
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "bill")
+	private List<Linhas> listalinha ;
+	
 	public Bill () { }
+
+	
+	
+	public List<Linhas> getListalinha() {
+		return listalinha;
+	}
+
+
+
+	public void setListalinha(List<Linhas> listalinha) {
+		this.listalinha = listalinha;
+	}
+
+
 
 	public long getIdNumber() {
 		return idNumber;
