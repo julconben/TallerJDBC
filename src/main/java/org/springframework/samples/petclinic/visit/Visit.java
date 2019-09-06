@@ -17,6 +17,7 @@ package org.springframework.samples.petclinic.visit;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,6 +41,7 @@ import org.springframework.samples.petclinic.owner.Bill;
 @Table(name = "visits")
 public class Visit extends BaseEntity {
 
+	
     /**
      * Holds value of property date.
      */

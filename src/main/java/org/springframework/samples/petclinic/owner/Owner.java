@@ -45,6 +45,10 @@ import org.springframework.samples.petclinic.model.Person;
 @Entity
 @Table(name = "owners")
 public class Owner extends Person {
+	 
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+//	private List<Bill> bills;
+	
     @Column(name = "address")
     @NotEmpty
     private String address;
@@ -126,6 +130,7 @@ public class Owner extends Person {
      * @param name to test
      * @return true if pet name is already in use
      */
+    
     public Pet getPet(String name, boolean ignoreNew) {
         name = name.toLowerCase();
         for (Pet pet : getPetsInternal()) {
@@ -140,7 +145,16 @@ public class Owner extends Person {
         return null;
     }
 
-    @Override
+    
+//    public List<Bill> getBills() {
+//		return bills;
+//	}
+//
+//	public void setBills(List<Bill> bills) {
+//		this.bills = bills;
+//	}
+
+	@Override
     public String toString() {
         return new ToStringCreator(this)
 
