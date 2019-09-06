@@ -1,43 +1,15 @@
 package org.springframework.samples.petclinic.owner;
 
-import java.util.List;
+import org.springframework.samples.petclinic.visit.Visit;
+import org.springframework.stereotype.Repository;
 
-public class VisitDAO implements IVisitDAO {
+@Repository
+public class VisitDAO extends AbstractJpaDAO<Visit, Integer> implements IVisitDAO {
+	
+	public VisitDAO() {
+        super();
 
-	@Override
-	public Object findOne(Object id) {
-		// TODO Auto-generated method stub
-		return null;
+        setClazz(Visit.class);
+	
 	}
-
-	@Override
-	public List findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void create(Object entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Object update() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void delete(Object entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteById(Object entityId) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

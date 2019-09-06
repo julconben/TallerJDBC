@@ -1,4 +1,4 @@
-package org.springframework.samples.petclinic.owner;
+package org.springframework.samples.petclinic;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public interface IBaseDAO <T, Id> {
 	
 	void create(T entity);
 	
-	T update();
+	T update(T entity);
 	
 	void delete(T entity);
 	

@@ -3,8 +3,9 @@ package org.springframework.samples.petclinic.owner;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
+
+import org.springframework.samples.petclinic.IBaseDAO;
 
 
 

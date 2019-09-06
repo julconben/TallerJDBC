@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.owner;
 
-public interface IPetDAO extends IBaseDAO<Bill, Integer>{
+import org.springframework.samples.petclinic.IBaseDAO;
+
+public interface IPetDAO extends IBaseDAO<Pet, Integer>{
 
 }
