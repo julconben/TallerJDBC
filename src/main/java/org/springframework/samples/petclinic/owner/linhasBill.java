@@ -39,5 +39,19 @@ public class linhasBill extends BaseEntity{
 	@Column(name = "detalhe")
 	private String detalhe;
 	
+	public void setBill(Bill bill) {
+		this.bill = bill;
+	}
+	public void setDetails(String detalhe) {
+		this.detalhe = detalhe;
+	}
+	
+	public Bill getBill() {
+		return bill;
+	}
+	public String getDetails() {
+		return detalhe;
+	}
+	
 
 }
