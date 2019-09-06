@@ -17,6 +17,9 @@ package org.springframework.samples.petclinic.owner;
 
 import java.util.Map;
 
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +46,8 @@ class VisitController {
 
     private final VisitRepository visits;
     private final PetRepository pets;
-
-
+    
+   
     @Autowired
     public VisitController(VisitRepository visits, PetRepository pets) {
         this.visits = visits;
