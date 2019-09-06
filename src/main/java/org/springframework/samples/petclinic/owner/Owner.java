@@ -45,22 +45,33 @@ import org.springframework.samples.petclinic.model.Person;
 @Entity
 @Table(name = "owners")
 public class Owner extends Person {
-    @Column(name = "address")
+
+	
+   // @Column(name = "address")
     @NotEmpty
     private String address;
 
-    @Column(name = "city")
+   // @Column(name = "city")
     @NotEmpty
     private String city;
 
-    @Column(name = "telephone")
+   // @Column(name = "telephone")
     @NotEmpty
     @Digits(fraction = 0, integer = 10)
     private String telephone;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private Set<Pet> pets;
+   // @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    //private List<Bill> bill;
 
+    /*public List<Bill> getBill() {
+        return this.bill;
+    }
+
+    public void setBill(List<Bill> bill) {
+        this.bill = bill;
+    }*/
 
     public String getAddress() {
         return this.address;
@@ -102,7 +113,9 @@ public class Owner extends Person {
         PropertyComparator.sort(sortedPets, new MutableSortDefinition("name", true, true));
         return Collections.unmodifiableList(sortedPets);
     }
-
+    public void setPets(Set<Pet> pets) {
+    	this.pets=pets;
+    }
     public void addPet(Pet pet) {
         if (pet.isNew()) {
             getPetsInternal().add(pet);

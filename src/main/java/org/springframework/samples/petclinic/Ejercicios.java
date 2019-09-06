@@ -105,7 +105,7 @@ public class Ejercicios {
     	//Owner ze = new Owner();
     	//Pet toze= new Pet();
     	
-    	Date data = new Date(0, 7, 17);
+    	Date data = new Date(2000/7/17);
     	
     	String sql1 = "INSERT INTO owners VALUES (null, 'Sofia', 'Condesso', 'Rua da Amendoeira', 'Faro', 917706689);";
     	String sql2 = "INSERT INTO pets VALUES (null, 'Toze', ?, 145444, 3);";
