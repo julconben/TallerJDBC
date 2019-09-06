@@ -125,6 +125,10 @@ public class Ejercicios {
 		preparedStatement.executeUpdate();
 		System.out.println("Se han insertado una Mascota numero " + owner.getFirstName() + " rows.");	
 		
+		// Delete pets
+		// Depois
+		//Delete Owner
+		
 	}
 
 }
